@@ -5,13 +5,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Product product = new Product();
+        Basket basket = new Basket();
         Scanner scanner = new Scanner(System.in);
-
 
         /**
          * Наполняем магазин продуктами
          */
-        product.addBaseProduct();
+        product.createBaseProduct();
+
 
         System.out.println("Добро пожаловать в магазин!");
 
@@ -35,11 +36,11 @@ public class Main {
             switch (inputUser) {
                 case 1 -> {
                     System.out.println("Список доступных товаров:\n");
-                    product.getProductList();
+                    basket.getProductList();
                 }
                 case 2 -> {
                     Scanner scannerBasket = new Scanner(System.in);
-                    product.getProductList();
+                    basket.getProductList();
                     while (true) {
                         System.out.println("\nВведите имя продукта из списка и его количество, " +
                                 "который хотите добавить в корзину");
@@ -50,19 +51,20 @@ public class Main {
                         String[] parts = products.split(" ");
                         String productName = parts[0];
                         int productQuantity = Integer.parseInt(parts[1]);
-                        product.addProductBasket(productName, productQuantity);
+                        basket.addProductBasket(productName, productQuantity);
                     }
                     System.out.println("Добавление в корзину завершено");
                 }
                 case 3 -> {
-                    // Оплатить продукты в корзине
+                    basket.buyProduct();
+                    // TODO при покупке должен присваиваться трек-номер
                 }
                 case 4 -> {
                     System.out.println("Список продуктов в корзине:");
-                    product.getProductBasket();
+                    basket.getProductBasket();
                 }
                 case 5 -> {
-                    product.clearBasket();
+                    basket.clearBasket();
                     System.out.println("Корзина успешно очищена");
                 }
                 case 6 -> {
@@ -70,17 +72,17 @@ public class Main {
                     int minValue = scanner.nextInt();
                     System.out.print("Введите макс. цену продукта: ");
                     int maxValue = scanner.nextInt();
-                    product.filterProductPrice(minValue, maxValue);
+                    basket.filterProductPrice(minValue, maxValue);
                 }
                 case 7 -> {
                     String productName = scanner.nextLine();
-                    product.filterProductName(productName);
+                    basket.filterProductName(productName);
                 }
                 case 8 -> {
-                    // Проверить заказ по трекинг номеру
+                    // TODO Проверить заказ по трекинг номеру
                 }
                 case 9 -> {
-                    // Повторить заказ по трекинг номеру
+                    // TODO Повторить заказ по трекинг номеру
                 }
                 case 10 -> {
                     System.out.println("Вы вышли из программы.");
