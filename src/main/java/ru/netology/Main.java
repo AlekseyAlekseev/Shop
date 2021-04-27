@@ -14,10 +14,10 @@ public class Main {
         product.addBaseProduct();
         product.getProductList();
 
-        product.addProductBasket( "Соль", 4);
+        product.addProductBasket( "Соль", 2);
         System.out.println("----------------------------------------");
         product.getProductBasket();
-        product.addProductBasket( "Морковь", 5);
+        product.addProductBasket( "Морковь", 7);
         System.out.println("----------------------------------------");
         product.getProductBasket();
         System.out.println("----------------------------------------");

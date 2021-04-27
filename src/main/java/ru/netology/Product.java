@@ -55,10 +55,11 @@ public class Product {
         productsBasket.clear();
     }
 
+
     public void addProductBasket(String productName, int quantity) {
         for (Map.Entry<String, Integer> product : products.entrySet()) {
             if (product.getKey().equals(productName)) {
-                productsBasket.put(productName, product.setValue(quantity));
+                productsBasket.put(productName, quantity);
                 break;
             }
         }
