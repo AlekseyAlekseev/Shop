@@ -11,17 +11,20 @@ public class Main {
         /**
          * Наполняем магазин продуктами
          */
-        product.createBaseProduct();
+        basket.createBaseProduct();
+
+        //basket.print();
+        System.out.println(basket.createTrackingNumber());
 
 
         System.out.println("Добро пожаловать в магазин!");
 
-        System.out.println("Выберите необходимый пункт в меню:\n" +
+        System.out.println("\nВыберите необходимый пункт в меню:\n" +
                 "1. Вывести список продуктов\n" +
                 "2. Добавить в корзину\n" +
                 "3. Оплатить продукты в корзине\n" +
                 "4. Показать продукты в корзине\n" +
-                "5. Удалить из корзины\n" +
+                "5. Очистить корзину\n" +
                 "6. Фильтровать услуги по цене\n" +
                 "7. Найти товар по наименованию\n" +
                 "8. Проверить заказ по трекинг номеру\n" +
@@ -43,9 +46,10 @@ public class Main {
                     basket.getProductList();
                     while (true) {
                         System.out.println("\nВведите имя продукта из списка и его количество, " +
-                                "который хотите добавить в корзину");
+                                "который хотите добавить в корзину.\n" +
+                                "Если все необходимые товары добавлены в корзину, напишите 'Стоп'");
                         String products = scannerBasket.nextLine();
-                        if ("end".equals(products)) {
+                        if ("Стоп".equals(products)) {
                             break;
                         }
                         String[] parts = products.split(" ");
@@ -57,6 +61,7 @@ public class Main {
                 }
                 case 3 -> {
                     basket.buyProduct();
+                    basket.print();
                     // TODO при покупке должен присваиваться трек-номер
                 }
                 case 4 -> {
@@ -75,7 +80,9 @@ public class Main {
                     basket.filterProductPrice(minValue, maxValue);
                 }
                 case 7 -> {
-                    String productName = scanner.nextLine();
+                    Scanner search = new Scanner(System.in);
+                    System.out.print("Для поиска введите наименование товара: ");
+                    String productName = search.nextLine();
                     basket.filterProductName(productName);
                 }
                 case 8 -> {
@@ -97,3 +104,4 @@ public class Main {
         scanner.close();
     }
 }
+
