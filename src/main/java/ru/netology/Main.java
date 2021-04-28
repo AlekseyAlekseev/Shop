@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Product product = new Product();
+        StoreProducts products = new StoreProducts();
         Basket basket = new Basket();
         Scanner scanner = new Scanner(System.in);
 
         /**
          * Наполняем магазин продуктами
          */
-        basket.createBaseProduct();
+        products.createBaseProduct();
 
         //basket.print();
         System.out.println(basket.createTrackingNumber());
@@ -39,28 +39,28 @@ public class Main {
             switch (inputUser) {
                 case 1 -> {
                     System.out.println("Список доступных товаров:\n");
-                    basket.getProductList();
+                    products.getProductList();
                 }
                 case 2 -> {
                     Scanner scannerBasket = new Scanner(System.in);
-                    basket.getProductList();
+                  //  basket.getProductList();
                     while (true) {
                         System.out.println("\nВведите имя продукта из списка и его количество, " +
                                 "который хотите добавить в корзину.\n" +
                                 "Если все необходимые товары добавлены в корзину, напишите 'Стоп'");
-                        String products = scannerBasket.nextLine();
-                        if ("Стоп".equals(products)) {
+                        String product = scannerBasket.nextLine();
+                        if ("Стоп".equals(product)) {
                             break;
                         }
-                        String[] parts = products.split(" ");
+                        String[] parts = product.split(" ");
                         String productName = parts[0];
                         int productQuantity = Integer.parseInt(parts[1]);
-                        basket.addProductBasket(productName, productQuantity);
+                      //  basket.addProductBasket(productName, productQuantity);
                     }
                     System.out.println("Добавление в корзину завершено");
                 }
                 case 3 -> {
-                    basket.buyProduct();
+                    basket.buyProductsBasket();
                     basket.print();
                     // TODO при покупке должен присваиваться трек-номер
                 }
@@ -77,13 +77,13 @@ public class Main {
                     int minValue = scanner.nextInt();
                     System.out.print("Введите макс. цену продукта: ");
                     int maxValue = scanner.nextInt();
-                    basket.filterProductPrice(minValue, maxValue);
+                    products.filterProductPrice(minValue, maxValue);
                 }
                 case 7 -> {
                     Scanner search = new Scanner(System.in);
                     System.out.print("Для поиска введите наименование товара: ");
                     String productName = search.nextLine();
-                    basket.filterProductName(productName);
+                    products.filterProductName(productName);
                 }
                 case 8 -> {
                     // TODO Проверить заказ по трекинг номеру

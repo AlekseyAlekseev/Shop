@@ -1,11 +1,6 @@
 package ru.netology;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Product {
-
-
     private String name;
     private int price;
 
@@ -14,13 +9,6 @@ public class Product {
         this.name = name;
         this.price = price;
     }
-
-    public Product () {
-
-    }
-
-
-
 
     public String getName() {
         return name;
