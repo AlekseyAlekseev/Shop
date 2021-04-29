@@ -48,7 +48,6 @@ public class Basket {
     }
 
     // TODO НЕ РАБОТАЕТ
-    // TODO Нужно подумать, как высчитывать общую сумму товара
     public void getProductBasket() {
         int i = 1;
         if (productsBasket.isEmpty()) {
