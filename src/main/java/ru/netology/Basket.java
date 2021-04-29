@@ -6,8 +6,10 @@ import java.util.*;
 public class Basket {
 
     StoreProducts storeProducts = new StoreProducts();
+    Product product = new Product();
+    private HashMap<Integer, Integer> countPrice = new HashMap<>();
 
-    private Map<Product, Integer> productsBasket;
+    private Map<Product, HashMap<Integer, Integer>> productsBasket;
     private Map<Product, Integer> createdOrder;
 
     public Basket() {
@@ -19,8 +21,12 @@ public class Basket {
     public void print() {
         System.out.println("В корзине вот что:");
         int i = 1;
-        for (Map.Entry<Product, Integer> product : productsBasket.entrySet()) {
-            System.out.println(i++ + ". " + product.getKey() + ", " + product.getValue() + " шт.");
+        for (Map.Entry<Product, HashMap<Integer, Integer>> product : productsBasket.entrySet()) {
+            for (Map.Entry<Integer, Integer> entry : countPrice.entrySet()) {
+                System.out.println(i++ + ". " + product.getKey().getName() + ", " + entry.getKey() + " шт." +
+                        ", Сумма: " + entry.getValue());
+                break;
+            }
         }
     }
 
@@ -29,14 +35,17 @@ public class Basket {
         productsBasket.clear();
     }
 
-    // TODO НЕ РАБОТАЕТ
+
+    // TODO REPAIR
     public void addProductBasket(String productName, int quantity) {
         for (Map.Entry<Product, Integer> products : storeProducts.getProductsMap().entrySet()) {
-                if (products.getKey().getName().equals(productName)) {
-                    productsBasket.put(products.getKey(), products.getKey().getPrice() * quantity);
-                }
+            if (products.getKey().getName().equals(productName)) {
+                int fullPrice = products.getKey().getPrice() * quantity;
+                countPrice.put(quantity, fullPrice);
+                productsBasket.put(products.getKey(), countPrice);
             }
         }
+    }
 
     // TODO НЕ РАБОТАЕТ
     // TODO Нужно подумать, как высчитывать общую сумму товара
@@ -45,10 +54,11 @@ public class Basket {
         if (productsBasket.isEmpty()) {
             System.out.println("Корзина пуста");
         } else {
-            for (Map.Entry<Product, Integer> products : productsBasket.entrySet()) {
-                // for (Product product : productList) {
-                System.out.println(i++ + ". " + products.getKey() + ", " + products.getValue() + " шт.");
-                // + "Сумма: " + product.getPrice() * products.getValue());
+            for (Map.Entry<Product, HashMap<Integer, Integer>> product : productsBasket.entrySet()) {
+                for (Map.Entry<Integer, Integer> entry : countPrice.entrySet()) {
+                    System.out.println(i++ + ". " + product.getKey().getName() + ", " + entry.getKey() + " шт." +
+                            ", Сумма: " + entry.getValue());
+                }
             }
         }
     }

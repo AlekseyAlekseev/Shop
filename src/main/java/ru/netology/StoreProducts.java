@@ -37,6 +37,7 @@ public class StoreProducts {
     }
 
     public Map<Product, Integer> getProductsMap() {
+        createBaseProduct();
         return productList;
     }
 

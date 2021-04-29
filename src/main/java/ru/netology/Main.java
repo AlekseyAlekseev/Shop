@@ -56,7 +56,6 @@ public class Main {
                 case 4 -> {
                     System.out.println("Список продуктов в корзине:");
                     basket.getProductBasket();
-                    basket.print();
                 }
                 case 5 -> {
                     basket.clearBasket();
