@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        MenuText menuText = new MenuText();
         StoreProducts products = new StoreProducts();
         Basket basket = new Basket();
         Scanner scanner = new Scanner(System.in);
@@ -14,22 +15,10 @@ public class Main {
         products.createBaseProduct();
 
         //basket.print();
-        System.out.println(basket.createTrackingNumber());
+        //System.out.println(basket.createTrackingNumber());
 
+        menuText.printMenu();
 
-        System.out.println("Добро пожаловать в магазин!");
-
-        System.out.println("\nВыберите необходимый пункт в меню:\n" +
-                "1. Вывести список продуктов\n" +
-                "2. Добавить в корзину\n" +
-                "3. Оплатить продукты в корзине\n" +
-                "4. Показать продукты в корзине\n" +
-                "5. Очистить корзину\n" +
-                "6. Фильтровать услуги по цене\n" +
-                "7. Найти товар по наименованию\n" +
-                "8. Проверить заказ по трекинг номеру\n" +
-                "9. Повторить заказ по трекинг номеру\n" +
-                "10. Завершить работу программы");
 
         innerloop:
         while (true) {
@@ -43,7 +32,7 @@ public class Main {
                 }
                 case 2 -> {
                     Scanner scannerBasket = new Scanner(System.in);
-                  //  basket.getProductList();
+                    products.getProductList();
                     while (true) {
                         System.out.println("\nВведите имя продукта из списка и его количество, " +
                                 "который хотите добавить в корзину.\n" +
@@ -55,18 +44,19 @@ public class Main {
                         String[] parts = product.split(" ");
                         String productName = parts[0];
                         int productQuantity = Integer.parseInt(parts[1]);
-                      //  basket.addProductBasket(productName, productQuantity);
+                        basket.addProductBasket(productName, productQuantity);
                     }
                     System.out.println("Добавление в корзину завершено");
                 }
                 case 3 -> {
-                    basket.buyProductsBasket();
+                   // basket.buyProductsBasket();
                     basket.print();
                     // TODO при покупке должен присваиваться трек-номер
                 }
                 case 4 -> {
                     System.out.println("Список продуктов в корзине:");
                     basket.getProductBasket();
+                    basket.print();
                 }
                 case 5 -> {
                     basket.clearBasket();

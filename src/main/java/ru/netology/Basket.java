@@ -5,67 +5,40 @@ import java.util.*;
 
 public class Basket {
 
-    Product product;
+    StoreProducts storeProducts = new StoreProducts();
 
     private Map<Product, Integer> productsBasket;
     private Map<Product, Integer> createdOrder;
-    private List<Product> productList;
 
     public Basket() {
         productsBasket = new HashMap<>();
         createdOrder = new HashMap<>();
-        productList = new ArrayList<>();
     }
-
-    public Basket (List<Product> productList) {
-        this.productList = productList;
-    }
-
-
-
-
-    public List<Product> getListProduct() {
-        return productList;
-    }
-
 
     // TODO нужно для проверки корректности покупки товара
     public void print() {
+        System.out.println("В корзине вот что:");
         int i = 1;
-        for (Map.Entry<Product, Integer> product : createdOrder.entrySet()) {
+        for (Map.Entry<Product, Integer> product : productsBasket.entrySet()) {
             System.out.println(i++ + ". " + product.getKey() + ", " + product.getValue() + " шт.");
         }
     }
-
-
-
-//    /**
-//     * Метод выводит весь список товаров клиенту
-//     */
-//    // TODO REPAIR
-//    public void getProductList() {
-//        int i = 1;
-//        for (Product products : product.getListProduct()) {
-//            System.out.println(i++ + ". " + products.getName() + ", " + products.getPrice() + " руб. за ед.");
-//        }
-//    }
 
     // TODO REPAIR
     public void clearBasket() {
         productsBasket.clear();
     }
 
-//    // TODO REPAIR
-//    public void addProductBasket(String productName, int quantity) {
-//        for (Product products : productList) {
-//            if (products.getName().equals(productName)) {
-//                productsBasket.put(products, quantity);
-//                break;
-//            }
-//        }
-//    }
+    // TODO НЕ РАБОТАЕТ
+    public void addProductBasket(String productName, int quantity) {
+        for (Map.Entry<Product, Integer> products : storeProducts.getProductsMap().entrySet()) {
+                if (products.getKey().getName().equals(productName)) {
+                    productsBasket.put(products.getKey(), products.getKey().getPrice() * quantity);
+                }
+            }
+        }
 
-    // TODO REPAIR
+    // TODO НЕ РАБОТАЕТ
     // TODO Нужно подумать, как высчитывать общую сумму товара
     public void getProductBasket() {
         int i = 1;
@@ -76,25 +49,25 @@ public class Basket {
                 // for (Product product : productList) {
                 System.out.println(i++ + ". " + products.getKey() + ", " + products.getValue() + " шт.");
                 // + "Сумма: " + product.getPrice() * products.getValue());
-                break;
             }
         }
     }
 
-    // TODO REPAIR
-    // TODO При покупке нужно присваивать трекинг-номер для отслеживания
-    public void buyProductsBasket() {
-        if (productsBasket.isEmpty()) {
-            System.out.println("Покупка невозможна! Корзина пуста.");
-        } else {
-            for (Map.Entry<Product, Integer> products : productsBasket.entrySet()) {
-                createdOrder.put(products.getKey(), products.getValue());
-            }
-        }
-    }
+//    // TODO REPAIR
+//    // TODO При покупке нужно присваивать трекинг-номер для отслеживания
+//    public void buyProductsBasket() {
+//        if (productsBasket.isEmpty()) {
+//            System.out.println("Покупка невозможна! Корзина пуста.");
+//        } else {
+//            for (Map.Entry<List<Product>, Integer> products : productsBasket.entrySet()) {
+//                createdOrder.put(products.getKey(), products.getValue());
+//            }
+//        }
+//    }
 
     /**
      * Генерирует трекинг-номер
+     *
      * @return
      */
     public int createTrackingNumber() {
@@ -105,26 +78,6 @@ public class Basket {
         int i = random.nextInt(diff + 1) + min;
         return i;
     }
-
-
-//    // TODO REPAIR, но нужно добавить обработку, если наименование товара не корректно
-//    public void filterProductName(String name) {
-//        for (Product products : product.productList) {
-//            if (products.getName().equals(name)) {
-//                System.out.println(products.getName() + ", " + products.getPrice() + " руб. за ед.");
-//            }
-//        }
-//    }
-//
-//    // TODO REPAIR
-//    public void filterProductPrice(int minValue, int maxValue) {
-//        int i = 1;
-//        for (Product products : productList) {
-//            if (products.getPrice() >= minValue && products.getPrice() <= maxValue) {
-//                System.out.println(i++ + ". " + products.getName() + ", " + products.getPrice() + " руб. за ед.");
-//            }
-//        }
-//    }
 }
 
 

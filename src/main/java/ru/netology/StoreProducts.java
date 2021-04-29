@@ -1,6 +1,7 @@
 package ru.netology;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StoreProducts {
@@ -9,10 +10,6 @@ public class StoreProducts {
 
     public StoreProducts() {
         productList = new HashMap<>();
-    }
-
-    public Map<Product, Integer> getProductMap() {
-        return productList;
     }
 
     Product sout = new Product("Соль", 4);
@@ -39,14 +36,18 @@ public class StoreProducts {
         productList.put(water, 1);
     }
 
+    public Map<Product, Integer> getProductsMap() {
+        return productList;
+    }
+
     /**
      * Метод выводит весь список товаров клиенту
      */
     // TODO REPAIR
     public void getProductList() {
         int i = 1;
-        for (Map.Entry<Product, Integer> product : productList.entrySet()) {
-            System.out.println(i++ + ". " + product.getKey() + ", " + product.getValue() + " шт.");
+        for (Map.Entry<Product, Integer> products : productList.entrySet()) {
+            System.out.println(i++ + ". " + products.getKey());
         }
     }
 
@@ -58,13 +59,12 @@ public class StoreProducts {
     // TODO REPAIR, но нужно добавить обработку, если наименование товара не корректно
     public void filterProductName(String name) {
         int i = 1;
-        for (Product key : productList.keySet()) {
-            if (key.getName().equals(name)) {
-                System.out.println(i++ + ". " + key);
+        for (Map.Entry<Product, Integer> products : productList.entrySet()) {
+            if (products.getKey().getName().equals(name)) {
+                System.out.println(i++ + ". " + products.getKey());
             }
         }
     }
-
     /**
      * Метод фильтрующий список продуктов по minValue и maxValue значениям
      *
@@ -74,9 +74,9 @@ public class StoreProducts {
     // TODO REPAIR
     public void filterProductPrice(int minValue, int maxValue) {
         int i = 1;
-        for (Product key : productList.keySet()) {
-            if (key.getPrice() >= minValue && key.getPrice() <= maxValue) {
-                System.out.println(i++ + ". " + key);
+        for (Map.Entry<Product, Integer> products : productList.entrySet()) {
+            if (products.getKey().getPrice() >= minValue && products.getKey().getPrice() <= maxValue) {
+                System.out.println(i++ + ". " + products.getKey());
             }
         }
     }
