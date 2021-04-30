@@ -1,5 +1,6 @@
 package ru.netology;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -36,9 +37,9 @@ public class Main {
                     while (true) {
                         System.out.println("\nВведите имя продукта из списка и его количество, " +
                                 "который хотите добавить в корзину.\n" +
-                                "Если все необходимые товары добавлены в корзину, напишите 'Стоп'");
+                                "Если все необходимые товары добавлены в корзину, напишите 'стоп'");
                         String product = scannerBasket.nextLine();
-                        if ("Стоп".equals(product)) {
+                        if ("стоп".equals(product)) {
                             break;
                         }
                         String[] parts = product.split(" ");

@@ -4,29 +4,35 @@ import java.util.*;
 
 
 public class Basket {
-
-    StoreProducts storeProducts = new StoreProducts();
     Product product = new Product();
-    private HashMap<Integer, Integer> countPrice = new HashMap<>();
+    StoreProducts storeProducts = new StoreProducts();
+    private LinkedHashMap<Integer, Integer> finalPrice;
 
-    private Map<Product, HashMap<Integer, Integer>> productsBasket;
-    private Map<Product, Integer> createdOrder;
+    private Map<Product, LinkedHashMap<Integer, Integer>> productsBasket;
+    private Map<Product, LinkedHashMap<Integer, Integer>> createdOrder;
 
     public Basket() {
-        productsBasket = new HashMap<>();
-        createdOrder = new HashMap<>();
+        productsBasket = new LinkedHashMap<>();
+        finalPrice = new LinkedHashMap<>();
+        createdOrder = new LinkedHashMap<>();
+
+        // createdOrder = new HashMap<>();
     }
 
     // TODO нужно для проверки корректности покупки товара
     public void print() {
         System.out.println("В корзине вот что:");
         int i = 1;
-        for (Map.Entry<Product, HashMap<Integer, Integer>> product : productsBasket.entrySet()) {
-            for (Map.Entry<Integer, Integer> entry : countPrice.entrySet()) {
-                System.out.println(i++ + ". " + product.getKey().getName() + ", " + entry.getKey() + " шт." +
-                        ", Сумма: " + entry.getValue());
-                break;
-            }
+        int count = 0;
+        for (Product product : productsBasket.keySet()) {
+            Map<Integer, Integer> colPrice = productsBasket.get(product);
+            List<Integer> cols = new ArrayList<>(colPrice.keySet());
+            int col = cols.get(count);
+            int price = colPrice.get(col);
+            System.out.println(i++ + ". " + "Товар: " + product.getName() +
+                    ", Кол-во: " + col +
+                    ", Общая сумма: " + price);
+            count++;
         }
     }
 
@@ -41,28 +47,34 @@ public class Basket {
         for (Map.Entry<Product, Integer> products : storeProducts.getProductsMap().entrySet()) {
             if (products.getKey().getName().equals(productName)) {
                 int fullPrice = products.getKey().getPrice() * quantity;
-                countPrice.put(quantity, fullPrice);
-                productsBasket.put(products.getKey(), countPrice);
+                finalPrice.put(quantity, fullPrice);
+                productsBasket.put(products.getKey(), finalPrice);
             }
         }
     }
 
-    // TODO НЕ РАБОТАЕТ
+
+    // TODO REPAIR
     public void getProductBasket() {
         int i = 1;
+        int count = 0;
         if (productsBasket.isEmpty()) {
             System.out.println("Корзина пуста");
         } else {
-            for (Map.Entry<Product, HashMap<Integer, Integer>> product : productsBasket.entrySet()) {
-                for (Map.Entry<Integer, Integer> entry : countPrice.entrySet()) {
-                    System.out.println(i++ + ". " + product.getKey().getName() + ", " + entry.getKey() + " шт." +
-                            ", Сумма: " + entry.getValue());
-                }
+            for (Product product : productsBasket.keySet()) {
+                Map<Integer, Integer> colPrice = productsBasket.get(product);
+                List<Integer> cols = new ArrayList<>(colPrice.keySet());
+                int col = cols.get(count);
+                int price = colPrice.get(col);
+                System.out.println(i++ + ". " + "Товар: " + product.getName() +
+                        ", Кол-во: " + col +
+                        ", Сумма: " + price + " руб.");
+                count++;
             }
         }
     }
 
-//    // TODO REPAIR
+//    // TODO WORK
 //    // TODO При покупке нужно присваивать трекинг-номер для отслеживания
 //    public void buyProductsBasket() {
 //        if (productsBasket.isEmpty()) {
