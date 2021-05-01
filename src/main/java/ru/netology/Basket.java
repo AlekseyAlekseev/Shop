@@ -51,7 +51,7 @@ public class Basket {
         } else {
             for (Product product : productsBasket.keySet()) {
                 Map<Integer, Integer> colPrice = productsBasket.get(product);
-                List<Integer> cols = new ArrayList<>(colPrice.keySet());
+                LinkedList<Integer> cols = new LinkedList<>(colPrice.keySet());
                 int col = cols.get(count);
                 int price = colPrice.get(col);
                 System.out.println(i++ + ". " + "Товар: " + product.getName() +
