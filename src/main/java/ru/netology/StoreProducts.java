@@ -22,6 +22,9 @@ public class StoreProducts {
     Product milk = new Product("Молоко", 76);
     Product water = new Product("Вода", 16);
 
+    /**
+     * Создает коллекцию продуктов
+     */
     public void createBaseProduct() {
         productList.put(sout, 1);
         productList.put(sugar, 1);
@@ -35,6 +38,10 @@ public class StoreProducts {
         productList.put(water, 1);
     }
 
+    /**
+     * Метод позволяющий получить коллекцию в другом классе
+     * @return
+     */
     public Map<Product, Integer> getProductsMap() {
         createBaseProduct();
         return productList;
@@ -53,7 +60,6 @@ public class StoreProducts {
 
     /**
      * Метод находит нужный товар по наименованию
-     *
      * @param name название продукта
      */
     // TODO REPAIR, но нужно добавить обработку, если наименование товара не корректно
@@ -67,7 +73,6 @@ public class StoreProducts {
     }
     /**
      * Метод фильтрующий список продуктов по minValue и maxValue значениям
-     *
      * @param minValue минимальная сумма для фильтрации
      * @param maxValue максимальная сумма для фильтрации
      */

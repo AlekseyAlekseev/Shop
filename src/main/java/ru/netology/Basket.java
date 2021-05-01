@@ -4,10 +4,8 @@ import java.util.*;
 
 
 public class Basket {
-    Product product = new Product();
     StoreProducts storeProducts = new StoreProducts();
     private LinkedHashMap<Integer, Integer> finalPrice;
-
     private Map<Product, LinkedHashMap<Integer, Integer>> productsBasket;
     private Map<Product, LinkedHashMap<Integer, Integer>> createdOrder;
 
@@ -15,34 +13,21 @@ public class Basket {
         productsBasket = new LinkedHashMap<>();
         finalPrice = new LinkedHashMap<>();
         createdOrder = new LinkedHashMap<>();
-
-        // createdOrder = new HashMap<>();
     }
 
-    // TODO нужно для проверки корректности покупки товара
-    public void print() {
-        System.out.println("В корзине вот что:");
-        int i = 1;
-        int count = 0;
-        for (Product product : productsBasket.keySet()) {
-            Map<Integer, Integer> colPrice = productsBasket.get(product);
-            List<Integer> cols = new ArrayList<>(colPrice.keySet());
-            int col = cols.get(count);
-            int price = colPrice.get(col);
-            System.out.println(i++ + ". " + "Товар: " + product.getName() +
-                    ", Кол-во: " + col +
-                    ", Общая сумма: " + price);
-            count++;
-        }
-    }
-
-    // TODO REPAIR
+    /**
+     * Метод очищающий корзину
+     */
     public void clearBasket() {
         productsBasket.clear();
     }
 
 
-    // TODO REPAIR
+    /**
+     * Метод для добавления продуктов в корзину
+     * @param productName наименование продукта
+     * @param quantity количество
+     */
     public void addProductBasket(String productName, int quantity) {
         for (Map.Entry<Product, Integer> products : storeProducts.getProductsMap().entrySet()) {
             if (products.getKey().getName().equals(productName)) {
@@ -54,7 +39,9 @@ public class Basket {
     }
 
 
-    // TODO REPAIR
+    /**
+     * Метод выводит в консоль содержимое корзины
+     */
     public void getProductBasket() {
         int i = 1;
         int count = 0;
