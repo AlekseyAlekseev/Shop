@@ -1,6 +1,5 @@
 package ru.netology;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -15,9 +14,10 @@ public class Main {
          */
         products.createBaseProduct();
 
-        //basket.print();
-        //System.out.println(basket.createTrackingNumber());
 
+        /**
+         * Выводим меню в консоль
+         */
         menuText.printMenu();
 
 
@@ -50,8 +50,7 @@ public class Main {
                     System.out.println("Добавление в корзину завершено");
                 }
                 case 3 -> {
-                   // basket.buyProductsBasket();
-                    basket.print();
+                    // basket.buyProductsBasket();
                     // TODO при покупке должен присваиваться трек-номер
                 }
                 case 4 -> {
@@ -76,20 +75,11 @@ public class Main {
                     products.filterProductName(productName);
                 }
                 case 8 -> {
-                    // TODO Проверить заказ по трекинг номеру
-                }
-                case 9 -> {
-                    // TODO Повторить заказ по трекинг номеру
-                }
-                case 10 -> {
                     System.out.println("Вы вышли из программы.");
                     break innerloop;
                 }
-
                 default -> System.out.println("Выберите корректный пункт из меню");
-
             }
-
         }
         scanner.close();
     }

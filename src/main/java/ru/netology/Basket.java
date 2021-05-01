@@ -25,15 +25,16 @@ public class Basket {
 
     /**
      * Метод для добавления продуктов в корзину
+     *
      * @param productName наименование продукта
-     * @param quantity количество
+     * @param quantity    количество
      */
     public void addProductBasket(String productName, int quantity) {
-        for (Map.Entry<Product, Integer> products : storeProducts.getProductsMap().entrySet()) {
-            if (products.getKey().getName().equals(productName)) {
-                int fullPrice = products.getKey().getPrice() * quantity;
+        for (Product products : storeProducts.getProductsMap()) {
+            if (products.getName().equals(productName)) {
+                int fullPrice = products.getPrice() * quantity;
                 finalPrice.put(quantity, fullPrice);
-                productsBasket.put(products.getKey(), finalPrice);
+                productsBasket.put(products, finalPrice);
             }
         }
     }
@@ -61,17 +62,16 @@ public class Basket {
         }
     }
 
-//    // TODO WORK
-//    // TODO При покупке нужно присваивать трекинг-номер для отслеживания
-//    public void buyProductsBasket() {
-//        if (productsBasket.isEmpty()) {
-//            System.out.println("Покупка невозможна! Корзина пуста.");
-//        } else {
-//            for (Map.Entry<List<Product>, Integer> products : productsBasket.entrySet()) {
-//                createdOrder.put(products.getKey(), products.getValue());
-//            }
-//        }
-//    }
+    // TODO Необходимо переделать
+    public void buyProductsBasket() {
+        if (productsBasket.isEmpty()) {
+            System.out.println("Покупка невозможна! Корзина пуста.");
+        } else {
+            for (Map.Entry<Product, LinkedHashMap<Integer, Integer>> products : productsBasket.entrySet()) {
+                createdOrder.put(products.getKey(), products.getValue());
+            }
+        }
+    }
 
     /**
      * Генерирует трекинг-номер

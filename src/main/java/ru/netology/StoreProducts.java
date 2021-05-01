@@ -1,14 +1,13 @@
 package ru.netology;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class StoreProducts {
 
-    private Map<Product, Integer> productList;
+    private List<Product> productList;
 
     public StoreProducts() {
-        productList = new HashMap<>();
+        productList = new ArrayList<>();
     }
 
     Product sout = new Product("Соль", 4);
@@ -26,23 +25,23 @@ public class StoreProducts {
      * Создает коллекцию продуктов
      */
     public void createBaseProduct() {
-        productList.put(sout, 1);
-        productList.put(sugar, 1);
-        productList.put(pepper, 1);
-        productList.put(onion, 1);
-        productList.put(beet, 1);
-        productList.put(potatoes, 1);
-        productList.put(carrot, 1);
-        productList.put(egg, 1);
-        productList.put(milk, 1);
-        productList.put(water, 1);
+        productList.add(sout);
+        productList.add(sugar);
+        productList.add(pepper);
+        productList.add(onion);
+        productList.add(beet);
+        productList.add(potatoes);
+        productList.add(carrot);
+        productList.add(egg);
+        productList.add(milk);
+        productList.add(water);
     }
 
     /**
      * Метод позволяющий получить коллекцию в другом классе
      * @return
      */
-    public Map<Product, Integer> getProductsMap() {
+    public List<Product> getProductsMap() {
         createBaseProduct();
         return productList;
     }
@@ -53,8 +52,8 @@ public class StoreProducts {
     // TODO REPAIR
     public void getProductList() {
         int i = 1;
-        for (Map.Entry<Product, Integer> products : productList.entrySet()) {
-            System.out.println(i++ + ". " + products.getKey());
+        for (Product products : productList) {
+            System.out.println(i++ + ". " + products.getName() + ", " + products.getPrice() + " руб. за ед.");
         }
     }
 
@@ -65,9 +64,9 @@ public class StoreProducts {
     // TODO REPAIR, но нужно добавить обработку, если наименование товара не корректно
     public void filterProductName(String name) {
         int i = 1;
-        for (Map.Entry<Product, Integer> products : productList.entrySet()) {
-            if (products.getKey().getName().equals(name)) {
-                System.out.println(i++ + ". " + products.getKey());
+        for (Product products : productList) {
+            if (products.getName().equals(name)) {
+                System.out.println(i++ + ". " + products.getName() + ", " + products.getPrice() + " руб. за ед.");
             }
         }
     }
@@ -76,12 +75,11 @@ public class StoreProducts {
      * @param minValue минимальная сумма для фильтрации
      * @param maxValue максимальная сумма для фильтрации
      */
-    // TODO REPAIR
     public void filterProductPrice(int minValue, int maxValue) {
         int i = 1;
-        for (Map.Entry<Product, Integer> products : productList.entrySet()) {
-            if (products.getKey().getPrice() >= minValue && products.getKey().getPrice() <= maxValue) {
-                System.out.println(i++ + ". " + products.getKey());
+        for (Product products : productList) {
+            if (products.getPrice() >= minValue && products.getPrice() <= maxValue) {
+                System.out.println(i++ + ". " + products.getName() + ", " + products.getPrice() + " руб. за ед.");
             }
         }
     }
